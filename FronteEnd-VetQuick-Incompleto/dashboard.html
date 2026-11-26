@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VetQuick — Painel clínico</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="dashboard.html" aria-label="VetQuick início">
+        <span class="brand-icon" aria-hidden="true">+</span>
+        <span>VetQuick</span>
+      </a>
+
+      <p class="nav-caption">GESTÃO CLÍNICA</p>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <button class="nav-item active" type="button" data-resource="tutores">
+          <span class="nav-symbol" aria-hidden="true">T</span>
+          <span>Tutores</span>
+        </button>
+        <button class="nav-item" type="button" data-resource="animais">
+          <span class="nav-symbol" aria-hidden="true">A</span>
+          <span>Animais</span>
+        </button>
+        <button class="nav-item" type="button" data-resource="consultas">
+          <span class="nav-symbol" aria-hidden="true">C</span>
+          <span>Consultas</span>
+        </button>
+        <button class="nav-item" type="button" data-resource="vacinas">
+          <span class="nav-symbol" aria-hidden="true">V</span>
+          <span>Vacinas</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="profile-card">
+          <div class="avatar" id="profileAvatar">V</div>
+          <div class="profile-copy">
+            <strong>Veterinário</strong>
+            <span id="profileEmail">Carregando perfil...</span>
+          </div>
+        </div>
+        <button class="logout-button" id="logoutButton" type="button">
+          <span aria-hidden="true">↪</span> Sair da conta
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PORTAL CLÍNICO</p>
+          <h1 id="pageTitle">Tutores</h1>
+        </div>
+        <div class="topbar-meta">
+          <span class="connection-dot" aria-hidden="true"></span>
+          <span>API conectada</span>
+        </div>
+      </header>
+
+      <section class="content">
+        <div id="notice" class="notice" role="status" aria-live="polite"></div>
+
+        <div class="stats-grid" aria-label="Resumo de registros">
+          <article class="stat-card">
+            <span class="stat-icon tutor-icon" aria-hidden="true">T</span>
+            <div><span class="stat-label">Tutores carregados</span><strong id="count-tutores">—</strong></div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon animal-icon" aria-hidden="true">A</span>
+            <div><span class="stat-label">Animais carregados</span><strong id="count-animais">—</strong></div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon consult-icon" aria-hidden="true">C</span>
+            <div><span class="stat-label">Consultas carregadas</span><strong id="count-consultas">—</strong></div>
+          </article>
+          <article class="stat-card">
+            <span class="stat-icon vaccine-icon" aria-hidden="true">V</span>
+            <div><span class="stat-label">Vacinas carregadas</span><strong id="count-vacinas">—</strong></div>
+          </article>
+        </div>
+
+        <section class="records-card">
+          <div class="records-header">
+            <div>
+              <h2 id="sectionTitle">Todos os tutores</h2>
+              <p id="sectionDescription">Gerencie os responsáveis cadastrados na clínica.</p>
+            </div>
+            <button type="button" class="primary-button" id="createButton">
+              <span aria-hidden="true">+</span> Novo tutor
+            </button>
+          </div>
+
+          <div class="table-toolbar">
+            <label class="search-box">
+              <span aria-hidden="true">⌕</span>
+              <input id="searchInput" type="search" placeholder="Buscar registros..." autocomplete="off" />
+            </label>
+            <button class="refresh-button" id="refreshButton" type="button">Atualizar</button>
+          </div>
+
+          <div class="table-scroll">
+            <table>
+              <thead><tr id="tableHead"></tr></thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+            <div id="emptyState" class="empty-state" hidden>
+              <span class="empty-symbol" aria-hidden="true">⌕</span>
+              <strong>Nenhum registro encontrado</strong>
+              <p>Adicione um registro ou ajuste sua busca.</p>
+            </div>
+          </div>
+          <div class="table-footer">
+            <span id="resultsLabel"></span>
+            <button type="button" class="load-more-button" id="loadMoreButton" hidden>Carregar mais</button>
+          </div>
+        </section>
+
+        <footer class="page-footer">VetQuick <span>•</span> Gestão clínica veterinária</footer>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="recordDialog" class="record-dialog">
+    <form id="recordForm" class="dialog-form">
+      <header class="dialog-header">
+        <div>
+          <p class="eyebrow">GESTÃO CLÍNICA</p>
+          <h2 id="dialogTitle">Novo registro</h2>
+        </div>
+        <button type="button" class="icon-button" id="closeDialogButton" aria-label="Fechar">×</button>
+      </header>
+      <div id="formFields" class="form-fields"></div>
+      <div id="formError" class="form-error" role="alert"></div>
+      <footer class="dialog-actions">
+        <button type="button" class="secondary-button" id="cancelDialogButton">Cancelar</button>
+        <button type="submit" class="primary-button" id="saveButton">Salvar registro</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
